@@ -1,0 +1,17 @@
+.main {
+  margin: 0px 32px;
+  .list {
+    .listItem {
+      background-color: rgba(225, 225, 225, 0.3);
+      margin: 8px 0px;
+      padding: 8px 16px;
+      width: 60%;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: rgba(0, 131, 141, 0.2);
+        color: #00838d;
+      }
+    }
+  }
+}
