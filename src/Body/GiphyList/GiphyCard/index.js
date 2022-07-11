@@ -1,29 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Tooltip from "@mui/material/Tooltip";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DownloadIcon from "@mui/icons-material/Download";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+
 import styles from "./styles.module.scss";
-import { saveAs } from "file-saver";
+import { useHooks } from "./hooks";
 
 const GiphyCard = ({ data }) => {
-  const [isCopied, setIsCopied] = useState(false);
-  const openWindow = () => {
-    window.open(data?.url);
-  };
-
-  const downloadImage = () => {
-    saveAs(data.images.original.url, `${data.title}.gif`);
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(data?.url);
-    setIsCopied(!isCopied);
-  };
-
-  const handleMouseLeave = () => {
-    setIsCopied(false);
-  };
+  const { isCopied, openWindow, handleCopy, handleMouseLeave, downloadImage } =
+    useHooks(data);
 
   return (
     <div className={styles.card} onMouseLeave={handleMouseLeave}>
