@@ -1,18 +1,31 @@
-import { CircularProgress, OutlinedInput } from "@mui/material";
-import GiphyCard from "./GiphyCard";
+import { OutlinedInput } from "@mui/material";
+import { connect } from "react-redux";
+
 import { useHooks } from "./hooks";
 import SearchHistory from "./SearchHistory";
 import styles from "./styles.module.scss";
+import {
+  searchGifs,
+  trendingGifs,
+  addSearchHistoryItem,
+} from "../redux/actions";
+import GiphyList from "./GiphyList";
 
-const Body = () => {
+const Body = (props) => {
   const {
-    data,
+    trending,
     search,
     searchHistory,
-    handleChange,
-    handleKeyDown,
-    dataLoading,
-  } = useHooks();
+    searchGifs,
+    trendingGifs,
+    addSearchHistoryItem,
+  } = props;
+  
+  const { keyword, key, handleChange, handleKeyDown } = useHooks(
+    searchGifs,
+    trendingGifs,
+    addSearchHistoryItem
+  );
 
   return (
     <div className={styles.body}>
@@ -20,7 +33,7 @@ const Body = () => {
         <OutlinedInput
           sx={{ fontSize: "24px", fontWeight: "bold", paddingLeft: "20px " }}
           type="text"
-          value={search}
+          value={keyword}
           onChange={(e) => {
             if (e.target.value.length > 0) {
               handleChange(e);
@@ -34,19 +47,23 @@ const Body = () => {
           <SearchHistory searchHistory={searchHistory} />
         </div>
         <div className={styles.list}>
-          {dataLoading ? (
-            <div className={styles.loading}>
-              <CircularProgress />
-            </div>
-          ) : (
-            data.map((item, index) => {
-              return <GiphyCard data={item} key={index} />;
-            })
-          )}
+          <GiphyList data={key === "trending" ? trending : search} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Body;
+const mapStateToProps = (state) => ({
+  trending: state.trending,
+  search: state.search,
+  searchHistory: state.searchHistory,
+});
+
+const mapDispatchToProps = {
+  searchGifs,
+  trendingGifs,
+  addSearchHistoryItem,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Body);

@@ -8,6 +8,7 @@ const GiphyCard = ({ data }) => {
   const openWindow = () => {
     window.open(data?.url);
   };
+  
   return (
     <div className={styles.card} onClick={openWindow}>
       <span className={styles.title}>{data?.title}</span>

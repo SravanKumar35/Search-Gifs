@@ -1,0 +1,10 @@
+export const TRENDING = "TRENDING";
+export const TRENDING_SUCCESS = "TRENDING_SUCCESS";
+export const TRENDING_ERROR = "TRENDING_ERROR";
+
+export const SEARCH = "SEARCH";
+export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
+export const SEARCH_ERROR = "SEARCH_ERROR";
+
+
+export const ADD_SEARCH_ITEM = "ADD_SEARCH_ITEM"
