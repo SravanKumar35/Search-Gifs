@@ -1,4 +1,4 @@
-import { SEARCH, SEARCH_ERROR, SEARCH_SUCCESS, TRENDING } from "../constants";
+import { SEARCH, SEARCH_ERROR, SEARCH_SUCCESS } from "../constants";
 import INITIAL_STATE from "../initialState";
 
 // eslint-disable-next-line import/no-anonymous-default-export
